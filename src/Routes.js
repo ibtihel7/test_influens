@@ -17,8 +17,6 @@ class Routes extends Component {
              <Route exact path='/articles' component={Article}/>
              <Route exact path='/purchases/:offerId' 
                           render={props=><Purchase offerId={props.match.params.offerId}/>}/>
-             {/* <Route exact path='/brands/:offerId' 
-             render={props=><Brand offerId={props.match.params.offerId}/>}/> */}
 
             
             </div>

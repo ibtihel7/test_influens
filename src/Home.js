@@ -39,7 +39,7 @@ class Home extends Component {
 
         return (
               <center>
-                  <h2> Veuillez cliquez sur la marque à consulter </h2>
+                  <h2> Please choose a brand </h2>
                 <span>{brandsList}</span>
             </center>
         )

@@ -32,10 +32,43 @@ componentDidMount() {
       this.setState({labels:this.props.lab})
 }
 
+ 
+    // chartRef = React.createRef();
+ 
+    // componentDidMount() {
+    //     console.log(this.props);
+
+    //     const myChartRef = this.chartRef.current.getContext("2d");        
+    //     // this.setState({data:this.props.cur})
+     
+        
+    //     new Chart(myChartRef, {
+    //         type: "line",
+    //         data: {
+    //             //Bring in data
+    //             // labels: this.state.data.labels,
+    //             labels : ['ll','kk','mm'],
+    //             datasets: [
+    //                 {
+    //                     label: "Sales",
+    //                     // data: this.state.data.cur,
+    //                     data : this.state.data.datasets.data
+    //                 }
+    //             ]
+    //         },
+    //         options: {
+    //             //Customize chart options
+    //         }
+    //     });
+    // }
     render() {
 
         return (
             <div className='curve' >
+				{/* div className={classes.graphContainer} */}
+        <spna>hi : {this.props.cur[0]}</spna>
+        <spna>hi : {this.props.cur[1]}</spna>
+
         <div>
         <Line
           data={this.state}

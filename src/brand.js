@@ -9,10 +9,11 @@ class Brand extends Component {
         }}
       
     componentDidMount() {
+
         const ref = config.ref('brands')
         ref.on('value', snapShot => {
           let dataa = snapShot.val() ;
-          let data = Object.values(Object.values (dataa).filter(b => b.offerId === parseInt(this.props.offerId)))[0]
+          let data = Object.values(Object.values(dataa).filter(b => b.offerId === parseInt(this.props.offerId)))[0]
 
           this.setState({
             brands: {...data}
@@ -20,6 +21,8 @@ class Brand extends Component {
         });
         
       }  
+
+
       
       render (){
         return ( <center>
