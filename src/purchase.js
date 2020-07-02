@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import config from "./config";
 import Brand from "./brand";
 import Influencer from "./influencerItem";
+import ListInfluencer from './influencerList'
 import Curve from "./curve";
 
 const conv = (d) => {
@@ -45,12 +46,14 @@ class Purchase extends Component {
         return r;
       }, Object.create(null));
 
-      console.log(infl);
+      // console.log(infl);
 
       let title = Array(infl)
         .map((e) => [...e[1]])[0]
         .map((e) => Object.values(e))[0][3];
-      console.log(title);
+      // console.log(title);
+
+// Amount and commission 
 
       let amoutInflu = Array(infl)
         .map((e) => [...e[1]])[0]
@@ -60,7 +63,7 @@ class Purchase extends Component {
           (accumulateur, valeurCourante) => accumulateur + valeurCourante
         );
 
-      console.log(amoutInflu);
+      // console.log(amoutInflu);
 
       let commissionInflu = infl
         ? Array(infl)
@@ -71,23 +74,20 @@ class Purchase extends Component {
               (accumulateur, valeurCourante) => accumulateur + valeurCourante
             )
         : 0;
-      console.log(commissionInflu);
+      // console.log(commissionInflu);
 
       let salesInflu = Object.entries(infl).map((e) => e[1].length);
-      console.log(salesInflu);
+      // console.log(salesInflu);
 
       let courbee = data.reduce(function (r, a) {
         r[a.createdAt] = r[a.createdAt] || [];
         r[a.createdAt].push(a);
         return r;
       }, Object.create(null));
-      // .map(e=>[e[0], e.length])
 
-      console.log(courbee);
+      // console.log(courbee);
 
-      let mois = Object.keys(courbee)
-        .map((e) => parseInt(e))
-        .map((e) => conv(e));
+      let mois = Object.keys(courbee).map((e) => parseInt(e)).map((e) => conv(e));
 
       const k = mois.reduce(
         (acc, e) => acc.set(e, (acc.get(e) || 0) + 1),
@@ -98,7 +98,7 @@ class Purchase extends Component {
       let influ = Object.entries(infl)
         .map((e) => e[0])
         .map((e) => parseInt(e));
-      console.log(influ);
+      // console.log(influ);
 
       let amount = data
         .map((e) => e.amount)
@@ -158,7 +158,6 @@ class Purchase extends Component {
               {/* <span>{this.state.purchases.influencer}</span>
     <span>{this.state.purchases.amount}</span>
     <span>{this.state.purchases.commission}</span>
-    <li>{this.state.purchases.createdAt}</li> */}
               {/* <li>{purchasesList}  </li>   */}
             </div>
           </Grid>
@@ -167,12 +166,23 @@ class Purchase extends Component {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} sm={5} md={5}>
+        {/* <Grid item xs={12} sm={12} md={12}>
           <Influencer
+            influencerList ={this.state.influencer}
             affiliateId={this.state.influencer[1]}
             salesInflu={this.state.salesInflu[1]}
             commissionInflu={this.state.commissionInflu}
             amountInflu={this.state.amountInflu}
+          />
+        </Grid> */}
+        <Grid item xs={12} sm={12} md={12}>
+          <ListInfluencer
+                      influencers ={this.state.influencer}
+
+            // affiliateId={this.state.influencer[2]}
+            // salesInflu={this.state.salesInflu[1]}
+            // commissionInflu={this.state.commissionInflu}
+            // amountInflu={this.state.amountInflu}
           />
         </Grid>
         <br />

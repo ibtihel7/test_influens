@@ -11,7 +11,7 @@ class Curve extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    // console.log(nextProps);
     this.setState({
       labels: nextProps.lab,
       data: nextProps.cur,

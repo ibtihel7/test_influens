@@ -7,35 +7,42 @@ class Influencer extends Component {
     this.state = {
       influencers: [],
     };
-    this.ref = config.ref("Influencers");
+    // this.ref.onthis.ref.on("value", (snapShot) => {
+    //   let dataa = snapShot.val();
+    // })
   }
 
   componentWillReceiveProps(nextProps) {
-    this.ref.on("value", (snapShot) => {
-      let dataa = snapShot.val();
-      console.log(dataa);
-      let data = Object.values(Object.values(dataa).map((e) => e.Profil))
-        .map((e) => Object.values(e))
-        .filter((b) => b[0] === nextProps.affiliateId)[0];
-      console.log(data);
-      this.setState({
-        influencers: [...data],
-      });
+    let data = nextProps.aff.filter((b) => b[0] === nextProps.item);
+    console.log(data);
+
+    this.setState({
+      influencers: [...data],
     });
   }
 
   render() {
+    const { item } = this.props;
+    console.log(this.state.influencers);
+
     return (
       <div>
+        {" "}
+        Influencer {item}
         <ul>
-          <li>  inf<img src={this.state.influencers[1]}/> </li>
+          <li>{this.state.influencers[0]}</li>
+
+          <li>
+            {" "}
+            inf <img src={this.state.influencers[2]} />{" "}
+          </li>
           <li>{this.state.influencers[5]}</li>
           <li>
             <h2>{this.state.influencers[4]}</h2>
           </li>
-          <li> {this.props.salesInflu} </li>   
+          {/* <li> {this.props.salesInflu} </li>   
           <li> {this.props.commissionInflu} </li> 
-     <li> {this.props.amountInflu} </li>   
+     <li> {this.props.amountInflu} </li>    */}
         </ul>
       </div>
     );
