@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import config from "./config";
 import Brand from "./brand";
 import Influencer from "./influencerItem";
-
-import { Line } from "react-chartjs-2";
-
+import Curve from "./curve";
 
 const conv = (d) => {
   let jour = new Date(d).getDate();
@@ -19,19 +17,18 @@ class Purchase extends Component {
   constructor() {
     super();
     this.state = {
-      title:"",
+      title: "",
       purchases: [],
       sales: 0,
       number: 0,
       influencer: [],
       monthList: [],
       monthsale: [],
-      salesInflu :[] ,
-      amoutInflu :0,
-      commisionInflu :0
+      salesInflu: [],
+      amoutInflu: 0,
+      commisionInflu: 0,
     };
     this.ref = config.ref("conversions/purchase");
-
   }
 
   componentDidMount() {
@@ -50,27 +47,34 @@ class Purchase extends Component {
 
       console.log(infl);
 
+      let title = Array(infl)
+        .map((e) => [...e[1]])[0]
+        .map((e) => Object.values(e))[0][3];
+      console.log(title);
 
-      let title =  (Array(infl).map(e=>[...e[1]]))[0].map(e=> Object.values(e))[0][3]
-      // .map(e=>e[2])
-console.log(title);
+      let amoutInflu = Array(infl)
+        .map((e) => [...e[1]])[0]
+        .map((e) => Object.values(e))
+        .map((e) => e[2])
+        .reduce(
+          (accumulateur, valeurCourante) => accumulateur + valeurCourante
+        );
 
- let amoutInflu =  (Array(infl).map(e=>[...e[1]]))[0].map(e=> Object.values(e)).map(e=>e[2])
- .reduce( 
-  (accumulateur, valeurCourante) => accumulateur + valeurCourante 
-) 
+      console.log(amoutInflu);
 
-console.log(amoutInflu);
+      let commissionInflu = infl
+        ? Array(infl)
+            .map((e) => [...e[1]])[0]
+            .map((e) => Object.values(e))
+            .map((e) => e[4])
+            .reduce(
+              (accumulateur, valeurCourante) => accumulateur + valeurCourante
+            )
+        : 0;
+      console.log(commissionInflu);
 
-  let commissionInflu=infl ? (Array(infl).map(e=>[...e[1]]))[0].map(e=> Object.values(e)).map(e=>e[4]).reduce( 
-    (accumulateur, valeurCourante) => accumulateur + valeurCourante
-  ):0
-  console.log(commissionInflu);
-  
-
-      let salesInflu= Object.entries(infl).map(e=>e[1].length)
+      let salesInflu = Object.entries(infl).map((e) => e[1].length);
       console.log(salesInflu);
-      
 
       let courbee = data.reduce(function (r, a) {
         r[a.createdAt] = r[a.createdAt] || [];
@@ -79,7 +83,6 @@ console.log(amoutInflu);
       }, Object.create(null));
       // .map(e=>[e[0], e.length])
 
-      
       console.log(courbee);
 
       let mois = Object.keys(courbee)
@@ -111,9 +114,9 @@ console.log(amoutInflu);
         influencer: influ,
         monthsale: monthsale,
         monthday: monthday,
-        salesInflu:salesInflu,
-        amoutInflu:amoutInflu,
-        commissionInflu:commissionInflu
+        salesInflu: salesInflu,
+        amoutInflu: amoutInflu,
+        commissionInflu: commissionInflu,
       });
     });
   }
@@ -130,27 +133,14 @@ console.log(amoutInflu);
     //     <br/> ------------------------  <br/>
     //      </div>
     //   })
-   
 
-    const curve = {
-      labels: this.state.monthday,
-      datasets: [
-        {
-          label: "month",
-          fill: false,
-          data: this.state.monthsale,
-          lineTension: 0.5,
-          backgroundColor: "rgba(75,192,192,1)",
-          borderWidth: 2,
-          borderColor: "#742774",
-        },
-      ],
-    };
     console.log(this.state.influencer);
 
     return (
       <div>
-        <center><h1>{this.state.title.toUpperCase()}</h1></center>
+        <center>
+          <h1>{this.state.title.toUpperCase()}</h1>
+        </center>
         <Grid container>
           <Grid item xs={12} sm={12} md={4}>
             <Brand offerId={this.props.offerId} />
@@ -173,17 +163,18 @@ console.log(amoutInflu);
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            {/* <Curve cur= {this.state.monthsale } lab ={this.state.monthday}/> */}
-
-            <Line data={curve} />
+            <Curve cur={this.state.monthsale} lab={this.state.monthday} />
           </Grid>
         </Grid>
 
         <Grid item xs={12} sm={5} md={5}>
-          <Influencer affiliateId={this.state.influencer[1]} salesInflu = {this.state.salesInflu[1]}
-          
-          commissionInflu={this.state.commissionInflu}  amountInflu={this.state.amountInflu} />
-                </Grid>
+          <Influencer
+            affiliateId={this.state.influencer[1]}
+            salesInflu={this.state.salesInflu[1]}
+            commissionInflu={this.state.commissionInflu}
+            amountInflu={this.state.amountInflu}
+          />
+        </Grid>
         <br />
 
         <center className="but">

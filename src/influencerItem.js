@@ -25,13 +25,6 @@ class Influencer extends Component {
   }
 
   render() {
-    // const influencersList = Object.keys(this.state.influencers).map(key=>{
-    //     return <div><p key = {key}> {this.state.influencers[key].Profil.name}</p>
-    //     <p key = {key}> {this.state.influencers[key].Profil.email}</p>
-    //      <img src= {this.state.influencers[key].Profil.banner} />
-    //     <br/>   <br/>
-    //     </div>
-    //   })
     return (
       <div>
         <ul>

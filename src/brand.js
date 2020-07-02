@@ -21,9 +21,7 @@ class Brand extends Component {
         });
         
       }  
-
-
-      
+  
       render (){
         return ( <center>
         <ul>
