@@ -1,49 +1,29 @@
-/* .App {
+.contactItemContainer{
+  border: 1px solid rgb(223, 201, 201);
+  width: 80%;
   text-align: center;
+  height: 250px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.brandpic{
+  height: 300px;
+  width: 80%;
+  margin-top: 60px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 
 ul{
   list-style-type: none;
 }
 
-h2{
+h2,h4{
   color : burlywood
+}
+h5{
+  color: blue;
+}
+.picture{
+height: 50;
+width: 20%;
+margin-left:2% ;
 }
 .sales{
   border-style: outset;
@@ -51,6 +31,11 @@ h2{
   border-radius: 30px;
   padding-left: 40px;
   margin-top: 150px
+}
+
+.listContainer{
+  display: flex;
+  flex-wrap: wrap
 }
 
 .curve {
@@ -71,3 +56,4 @@ h1{
   margin-top: 30px;
   margin-bottom: 70px;
 }
+

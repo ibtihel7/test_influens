@@ -4,8 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import config from "./config";
 import Brand from "./brand";
-import Influencer from "./influencerItem";
-import ListInfluencer from './influencerList'
+import ListInfluencer from "./influencerList";
 import Curve from "./curve";
 
 const conv = (d) => {
@@ -38,7 +37,6 @@ class Purchase extends Component {
       let data = Object.values(dataa).filter(
         (b) => b.offerId === parseInt(this.props.offerId)
       );
-      console.log(data);
 
       let infl = data.reduce(function (r, a) {
         r[a.affiliateId] = r[a.affiliateId] || [];
@@ -48,46 +46,43 @@ class Purchase extends Component {
 
       // console.log(infl);
 
-      let title = Array(infl)
-        .map((e) => [...e[1]])[0]
-        .map((e) => Object.values(e))[0][3];
-      // console.log(title);
+      // let title = Array(infl)
+      // .map((e) => [...e[1]])[0]
+      // .map((e) => Object.values(e))[0][3];
 
-// Amount and commission 
+      // Amount and commission
 
-      let amoutInflu = Array(infl)
-        .map((e) => [...e[1]])[0]
-        .map((e) => Object.values(e))
-        .map((e) => e[2])
-        .reduce(
-          (accumulateur, valeurCourante) => accumulateur + valeurCourante
-        );
+      // let amoutInflu = Array(infl)
+      //   .map((e) => [...e[1]])[0]
+      //   .map((e) => Object.values(e))
+      //   .map((e) => e[2])
+      //   .reduce(
+      //     (accumulateur, valeurCourante) => accumulateur + valeurCourante
+      //   );
 
       // console.log(amoutInflu);
 
-      let commissionInflu = infl
-        ? Array(infl)
-            .map((e) => [...e[1]])[0]
-            .map((e) => Object.values(e))
-            .map((e) => e[4])
-            .reduce(
-              (accumulateur, valeurCourante) => accumulateur + valeurCourante
-            )
-        : 0;
+      // let commissionInflu = infl
+      //   ? Array(infl)
+      //       .map((e) => [...e[1]])[0]
+      //       .map((e) => Object.values(e))
+      //       .map((e) => e[4])
+      //       .reduce(
+      //         (accumulateur, valeurCourante) => accumulateur + valeurCourante
+      //       )
+      //   : 0;
       // console.log(commissionInflu);
 
       let salesInflu = Object.entries(infl).map((e) => e[1].length);
-      // console.log(salesInflu);
-
       let courbee = data.reduce(function (r, a) {
         r[a.createdAt] = r[a.createdAt] || [];
         r[a.createdAt].push(a);
         return r;
       }, Object.create(null));
 
-      // console.log(courbee);
-
-      let mois = Object.keys(courbee).map((e) => parseInt(e)).map((e) => conv(e));
+      let mois = Object.keys(courbee)
+        .map((e) => parseInt(e))
+        .map((e) => conv(e));
 
       const k = mois.reduce(
         (acc, e) => acc.set(e, (acc.get(e) || 0) + 1),
@@ -98,7 +93,6 @@ class Purchase extends Component {
       let influ = Object.entries(infl)
         .map((e) => e[0])
         .map((e) => parseInt(e));
-      // console.log(influ);
 
       let amount = data
         .map((e) => e.amount)
@@ -107,7 +101,7 @@ class Purchase extends Component {
         }, 0);
 
       this.setState({
-        title: title,
+        // title: title,
         purchases: [...data],
         sales: data.length,
         amount: amount,
@@ -115,8 +109,8 @@ class Purchase extends Component {
         monthsale: monthsale,
         monthday: monthday,
         salesInflu: salesInflu,
-        amoutInflu: amoutInflu,
-        commissionInflu: commissionInflu,
+        // amoutInflu: amoutInflu,
+        // commissionInflu: commissionInflu,
       });
     });
   }
@@ -134,13 +128,9 @@ class Purchase extends Component {
     //      </div>
     //   })
 
-    console.log(this.state.influencer);
-
     return (
       <div>
-        <center>
-          <h1>{this.state.title.toUpperCase()}</h1>
-        </center>
+        <center>{/* <h1>{this.state.title.toUpperCase()}</h1> */}</center>
         <Grid container>
           <Grid item xs={12} sm={12} md={4}>
             <Brand offerId={this.props.offerId} />
@@ -177,7 +167,7 @@ class Purchase extends Component {
         </Grid> */}
         <Grid item xs={12} sm={12} md={12}>
           <ListInfluencer
-                      influencers ={this.state.influencer}
+            influencers={this.state.influencer}
 
             // affiliateId={this.state.influencer[2]}
             // salesInflu={this.state.salesInflu[1]}

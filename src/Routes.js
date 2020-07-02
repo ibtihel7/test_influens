@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom'
 import Home from './Home'
-// import Brand from './brand'
-import Influencer from './influencerItem'
 import Curve  from './curve'
 import Article from './article';
 import Purchase from './purchase'

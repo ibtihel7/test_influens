@@ -26,7 +26,7 @@ class Brand extends Component {
         return ( <center>
         <ul>
         {/* <li>{this.state.brands.offerId}</li> */}
-        <li><img src= {this.state.brands.pic} /></li>
+        <li><img className='brandpic' src= {this.state.brands.pic} /></li>
         <li><h2>{this.state.brands.name}</h2></li>
  <br/>            </ul>
 

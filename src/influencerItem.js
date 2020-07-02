@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import config from "./config";
 
 class Influencer extends Component {
   constructor(props) {
@@ -7,43 +6,49 @@ class Influencer extends Component {
     this.state = {
       influencers: [],
     };
-    // this.ref.onthis.ref.on("value", (snapShot) => {
-    //   let dataa = snapShot.val();
-    // })
   }
 
-  componentWillReceiveProps(nextProps) {
-    let data = nextProps.aff.filter((b) => b[0] === nextProps.item);
-    console.log(data);
-
+  componentDidMount() {
+    let data = this.props.aff.filter((b) => b[0] === this.props.item);
     this.setState({
       influencers: [...data],
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    let data = nextProps.aff.filter((b) => b[0] === nextProps.item)[0];
+
+    this.setState({
+      affilId: data[0],
+      pic: data[2],
+      name: data[7],
+      email: data[6],
+    });
+  }
+
   render() {
     const { item } = this.props;
-    console.log(this.state.influencers);
 
     return (
-      <div>
-        {" "}
-        Influencer {item}
-        <ul>
-          <li>{this.state.influencers[0]}</li>
+      <div className="contactItemContainer">
+        <h4> Influencer with affiliate Id {item}</h4>
+        <div className="listContainer">
+          <img className="picture" src={this.state.pic} />
+          <ul>
+            {/* <li>{this.state.affilId}</li> */}
+            <li>
+              {" "}
+              <h5>{this.state.name}</h5>
+            </li>
+            <li>
+              <h5>{this.state.email}</h5>
+            </li>
 
-          <li>
-            {" "}
-            inf <img src={this.state.influencers[2]} />{" "}
-          </li>
-          <li>{this.state.influencers[5]}</li>
-          <li>
-            <h2>{this.state.influencers[4]}</h2>
-          </li>
-          {/* <li> {this.props.salesInflu} </li>   
+            {/* <li> {this.props.salesInflu} </li>   
           <li> {this.props.commissionInflu} </li> 
      <li> {this.props.amountInflu} </li>    */}
-        </ul>
+          </ul>
+        </div>
       </div>
     );
   }
